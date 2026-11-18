@@ -1,11 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Topic</title>
-</head>
-<body>
-    <h1>Topic Page</h1>
-    <p>You are viewing topic number {{ topic_id }}.</p>
-</body>
-</html>
+
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+    <h1>{{ topic.text }}</h1>
+
+    <p>Entries:</p>
+
+    <ul>
+        {% for entry in entries %}
+            <li>
+                <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
+                <p>{{ entry.text|linebreaks }}</p>
+            </li>
+        {% empty %}
+            <li>No entries have been added yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
